@@ -1,0 +1,9 @@
+<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <interfaces xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces">
+    <interface>
+      <name>GigabitEthernet1</name>
+      <description>Geregeld door Milan via GitHub en NETCONF</description>
+      <enabled>true</enabled>
+    </interface>
+  </interfaces>
+</config>
