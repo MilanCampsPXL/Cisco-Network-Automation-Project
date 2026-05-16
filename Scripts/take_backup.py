@@ -2,7 +2,7 @@ from ncclient import manager
 import os
 
 # Router instellingen (Dinsdag in het lab aanpassen!)
-ROUTER_IP = "192.168.x.x" 
+ROUTER_IP = "10.199.65.103" 
 USERNAME = "admin"
 PASSWORD = "password"
 
