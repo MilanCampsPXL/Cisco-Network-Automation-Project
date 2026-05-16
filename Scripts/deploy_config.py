@@ -2,9 +2,9 @@ from ncclient import manager
 import sys
 
 # Gegevens van de router (Dinsdag aanpassen aan het lab!)
-ROUTER_IP = "192.168.x.x" 
+ROUTER_IP = "10.199.65.103" 
 USERNAME = "admin"
-PASSWORD = "password"
+PASSWORD = "superuser"
 
 def deploy():
     # We lezen de XML in (normaal haal je dit uit de Configs map)
