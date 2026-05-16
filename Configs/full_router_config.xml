@@ -1,0 +1,18 @@
+<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+    <hostname>Router-Milan-PXL</hostname>
+  </native>
+
+  <interfaces xmlns="urn:ietf:params:xml:ns:yang:ietf-interfaces">
+    <interface>
+      <name>GigabitEthernet1</name>
+      <description>Uplink naar PXL Core Netwerk</description>
+      <enabled>true</enabled>
+    </interface>
+    <interface>
+      <name>GigabitEthernet2</name>
+      <description>Local Area Network (LAN)</description>
+      <enabled>true</enabled>
+    </interface>
+  </interfaces>
+</config>
