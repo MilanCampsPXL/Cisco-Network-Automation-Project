@@ -1,13 +1,12 @@
 from ncclient import manager
 import os
 
-# Router instellingen (Dinsdag in het lab aanpassen!)
+# Gegevens van jouw specifieke lab-router
 ROUTER_IP = "10.199.65.103" 
 USERNAME = "admin"
 PASSWORD = "password"
 
 def push_full_config():
-    # Pad naar je volledige XML config bestand
     config_path = '../Configs/full_router_config.xml'
     
     if not os.path.exists(config_path):
@@ -25,15 +24,33 @@ def push_full_config():
                              password=PASSWORD, 
                              hostkey_verify=False) as m:
             
-            print("Volledige configuratie pushen naar de router...")
-            # 'edit_config' met target 'running' voert de XML live uit
-            response = m.edit_config(target='running', config=full_config_data)
+            # Stap 1: Lock de candidate datastore (Task 22)
+            print("Locking candidate datastore...")
+            m.lock(target='candidate')
             
-            print("🚀 Succes! De volledige configuratie is toegepast.")
-            print(f"Router response: {response}")
+            try:
+                print("Configuratie stagen in de candidate datastore (Task 36)...")
+                # We pushen de configuratie specifiek naar 'candidate' in plaats van 'running'
+                m.edit_config(target='candidate', config=full_config_data)
+                
+                print("Wijzigingen valideren en plegen (Commit naar running)...")
+                # Pas als dit lukt, wordt het definitief actief
+                m.commit()
+                print("🚀 Volledige deployment succesvol afgerond!")
+                
+            except Exception as eval_error:
+                print(f"⚠️ Fout tijdens staging/validation: {eval_error}")
+                print("Fout gedetecteerd! Wijzigingen in de candidate weggooien (discard-changes)...")
+                # Foutafhandeling eist discard-changes volgens Task 36
+                m.discard_changes()
+                
+            finally:
+                # Altijd netjes unlocken
+                print("Unlocking candidate datastore...")
+                m.unlock(target='candidate')
             
     except Exception as e:
-        print(f"Fout tijdens het pushen van de configuratie: {e}")
+        print(f"Fout tijdens de NETCONF-sessie: {e}")
 
 if __name__ == "__main__":
     push_full_config()
