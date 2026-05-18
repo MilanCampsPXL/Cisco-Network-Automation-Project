@@ -1,0 +1,14 @@
+Router> enable
+Router# configure terminal
+
+# 1. Maak de gebruiker aan met de hoogste rechten (Privilege 15)
+Router(config)# username admin privilege 15 secret password
+
+# 2. Zorg dat SSH en NETCONF geactiveerd zijn
+Router(config)# ip domain name pxl.local
+Router(config)# crypto key generate rsa general-keys modulus 2048
+Router(config)# netconf-yang
+
+# 3. Opslaan in het geheugen
+Router(config)# exit
+Router# write memory
