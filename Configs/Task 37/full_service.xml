@@ -1,0 +1,52 @@
+<config>
+
+  <native xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-native">
+
+    <hostname>CSR-ANSIBLE</hostname>
+
+    <interface>
+
+      <Loopback>
+        <name>70</name>
+
+        <description>ANSIBLE_DEPLOYMENT</description>
+
+        <ip>
+          <address>
+            <primary>
+              <address>70.70.70.1</address>
+              <mask>255.255.255.255</mask>
+            </primary>
+          </address>
+        </ip>
+
+      </Loopback>
+
+      <GigabitEthernet>
+        <name>1</name>
+
+        <description>ANSIBLE_NETCONF_INTERFACE</description>
+
+      </GigabitEthernet>
+
+    </interface>
+
+    <router>
+
+      <ospf xmlns="http://cisco.com/ns/yang/Cisco-IOS-XE-ospf">
+
+        <id>1</id>
+
+        <network>
+          <ip>70.70.70.0</ip>
+          <mask>0.0.0.255</mask>
+          <area>0</area>
+        </network>
+
+      </ospf>
+
+    </router>
+
+  </native>
+
+</config>
